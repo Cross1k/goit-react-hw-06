@@ -1,0 +1,16 @@
+.container {
+  margin: 40px 0;
+}
+
+.text {
+  width: 164px;
+  display: block;
+  margin-bottom: 4px;
+}
+.input {
+  width: 512px;
+  padding: 4px;
+  border: solid 1px #333;
+  border-radius: 4px;
+  outline: transparent;
+}

@@ -1,0 +1,13 @@
+.text {
+  display: inline-block;
+  margin: 0;
+  text-size-adjust: 10px;
+  position: relative;
+  padding-left: 28px;
+  width: 200px;
+}
+
+.icons {
+  left: 0;
+  position: absolute;
+}
