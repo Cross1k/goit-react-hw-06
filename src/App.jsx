@@ -1,44 +1,33 @@
-import { useEffect, useState } from "react";
 import "./App.css";
 import ContactList from "./components/ContactList/ContactList";
 import SearchBox from "./components/SearchBox/SearchBox";
 import ContactForm from "./components/ContactForm/ContactForm";
-
-const InitialState = [
-  { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-  { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-  { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-  { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { addContact, deleteContact } from "./redux/contacts/contacts";
+import { filterContacts } from "./redux/filters/filters";
 
 function App() {
-  const getInitialValues = () => {
-    const savedValues = window.localStorage.getItem("persons-info");
-    return savedValues != null ? JSON.parse(savedValues) : InitialState;
-  };
+  const dispatch = useDispatch();
+  const contacts = useSelector((state) => state.contacts.contacts);
+  const filter = useSelector((state) => state.filter.filter);
 
-  const [list, setList] = useState(getInitialValues);
-
-  const [filter, setFilter] = useState("");
-
-  useEffect(() => {
-    window.localStorage.setItem("persons-info", JSON.stringify(list));
-  }, [list]);
-
-  const visiblePersons = list.filter((item) =>
+  const visiblePersons = contacts.filter((item) =>
     item.name.toLowerCase().includes(filter.toLocaleLowerCase())
   );
 
   const addPerson = (newPerson) => {
-    setList((prevList) => {
-      return [...prevList, newPerson];
-    });
+    const action = addContact(newPerson);
+    dispatch(action);
   };
 
   const deletePerson = (personId) => {
-    setList((prevList) => {
-      return prevList.filter((item) => item.id !== personId);
-    });
+    const action = deleteContact(personId);
+    dispatch(action);
+  };
+  const setFilter = (value) => {
+    console.log(value);
+    const action = filterContacts(value);
+    dispatch(action);
   };
 
   return (

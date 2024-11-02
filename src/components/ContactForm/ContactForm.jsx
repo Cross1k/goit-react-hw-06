@@ -44,7 +44,7 @@ export default function ContactForm({ onAdd }) {
             type="text"
             name="name"
             id={usernameId}
-            autocomplete="off"
+            autoComplete="off"
           ></Field>
           <ErrorMessage className={css.alert} name="name" component="span" />
         </div>
@@ -57,7 +57,7 @@ export default function ContactForm({ onAdd }) {
             type="text"
             name="number"
             id={numberId}
-            autocomplete="off"
+            autoComplete="off"
           ></Field>
           <ErrorMessage className={css.alert} name="number" component="span" />
         </div>
