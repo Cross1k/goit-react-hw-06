@@ -3,6 +3,8 @@ import { nanoid } from "nanoid";
 import { useId } from "react";
 import * as Yup from "yup";
 import css from "./ContactForm.module.css";
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contacts/contacts";
 
 const PersonSchema = Yup.object().shape({
   name: Yup.string()
@@ -19,12 +21,15 @@ const initialValues = {
   number: "",
 };
 
-export default function ContactForm({ onAdd }) {
+export default function ContactForm() {
+  const dispatch = useDispatch();
+
   const usernameId = useId();
   const numberId = useId();
 
   const handleAdd = (values, actions) => {
-    onAdd({ id: nanoid(), ...values });
+    const action = addContact({ id: nanoid(), ...values });
+    dispatch(action);
     actions.resetForm();
   };
 
